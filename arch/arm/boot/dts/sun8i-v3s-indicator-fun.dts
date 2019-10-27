@@ -45,66 +45,43 @@
 #include "sun8i-v3s-licheepi-zero.dts"
 
 / {
-	model = "INDICATOR-FUN";
-	compatible = "licheepi,licheepi-zero-dock", "licheepi,licheepi-zero",
-		     "allwinner,sun8i-v3s";
+    model = "INDICATOR-FUN";
+    compatible = "licheepi,licheepi-zero-dock", "licheepi,licheepi-zero",
+             "allwinner,sun8i-v3s";
 
-	aliases {
-		serial0 = &uart0;
+    aliases {
+        serial0 = &uart0;
         spi0 = &spi0;
-	};
+    };
+
+    leds {
+        compatible = "gpio-leds";
+
+        mmc_led {
+            label = "green_led";
+            gpios = <&pio 1 5 GPIO_ACTIVE_HIGH>; /* PB5 */
+            linux,default-trigger = "mmc0";
+        };
+    };
 };
 
 
 &codec {
-	allwinner,audio-routing =
-		"Headphone", "HP",
-		"Headphone", "HPCOM",
-		"MIC1", "Mic",
-		"Mic",  "HBIAS";
-	status = "okay";
-};
-
-&lradc {
-	vref-supply = <&reg_vcc3v0>;
-	status = "okay";
-
-	button@200 {
-		label = "Volume Up";
-		linux,code = <KEY_VOLUMEUP>;
-		channel = <0>;
-		voltage = <200000>;
-	};
-
-	button@400 {
-		label = "Volume Down";
-		linux,code = <KEY_VOLUMEDOWN>;
-		channel = <0>;
-		voltage = <400000>;
-	};
-
-	button@600 {
-		label = "Select";
-		linux,code = <KEY_SELECT>;
-		channel = <0>;
-		voltage = <600000>;
-	};
-
-	button@800 {
-		label = "Start";
-		linux,code = <KEY_OK>;
-		channel = <0>;
-		voltage = <800000>;
-	};
+    allwinner,audio-routing =
+        "Headphone", "HP",
+        "Headphone", "HPCOM",
+        "MIC1", "Mic",
+        "Mic",  "HBIAS";
+    status = "okay";
 };
 
 &mmc1 {
-	pinctrl-0 = <&mmc1_pins>;
-	pinctrl-names = "default";
-	broken-cd;
-	bus-width = <4>;
-	vmmc-supply = <&reg_vcc3v3>;
-	status = "okay";
+    pinctrl-0 = <&mmc1_pins>;
+    pinctrl-names = "default";
+    broken-cd;
+    bus-width = <4>;
+    vmmc-supply = <&reg_vcc3v3>;
+    status = "okay";
 };
 
 &pio {
@@ -116,7 +93,7 @@
 };
 
 &spi0 {
-	pinctrl-1 = <&spi0_cs1>;
+    pinctrl-1 = <&spi0_cs1>;
     pinctrl-names = "default", "default";
     cs-gpios = <0>, <&pio 0 36 0>; /* PB4 */
     status = "okay";
@@ -131,7 +108,7 @@
             reg = <0x0 0x200000>;
         };
     };
-    spidev@0x01 {
+    spidev@1 {
         compatible = "spidev";
         spi-max-frequency = <1200000>;
         reg = <1>;
