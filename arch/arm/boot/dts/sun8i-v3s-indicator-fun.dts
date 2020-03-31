@@ -124,4 +124,8 @@
     status = "okay";
     pinctrl-names = "default";
     pinctrl-0 = <&i2c1_pins>;
+    sgp30: sgp30@58 {
+        compatible = "sgp30";
+        reg = <0x58>;
+    };
 };
