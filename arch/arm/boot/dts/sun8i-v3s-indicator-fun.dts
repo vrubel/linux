@@ -90,6 +90,11 @@
         function = "gpio_out";
         output-high;
     };
+
+    i2c1_pins: i2c1-pins {
+        pins = "PE21", "PE22";
+        function = "i2c1";
+    };
 };
 
 &spi0 {
@@ -113,4 +118,10 @@
         spi-max-frequency = <1200000>;
         reg = <1>;
     };
+};
+
+&i2c1 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&i2c1_pins>;
 };
