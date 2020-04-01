@@ -129,3 +129,11 @@
         reg = <0x58>;
     };
 };
+
+&i2c0 {
+    status = "okay";
+    bh1730fvc@29 {
+	    compatible = "rohm,bh1730fvc";
+	    reg = <0x29>;
+    };
+};
