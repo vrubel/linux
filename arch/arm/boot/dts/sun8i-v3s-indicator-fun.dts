@@ -128,6 +128,10 @@
         compatible = "sgp30";
         reg = <0x58>;
     };
+    shtc1: shtc1@70 {
+        compatible = "shtc1";
+        reg = <0x70>;
+    };
 };
 
 &i2c0 {
